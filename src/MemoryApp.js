@@ -4,7 +4,7 @@ import Menu from './Menu.js';
 import Card from './Card';
 
 // Number of cards must be an even number
-const NUM_OF_CARDS = 20;
+// const NUM_OF_CARDS = 20;
 
 // This must have an even number of unique colors. It must be half the number of cards
 const COLORS = ["Blue",     "Brown", "Green",   "Cornsilk",     "Crimson",
@@ -49,26 +49,23 @@ class MemoryApp extends Component {
     this.onNewGame = this.onNewGame.bind(this);
   }
 
-  randomizeColors() {
-    // double the colors of array
-    const colors = COLORS.concat(COLORS);
-    
-    // shuffle the colors of array
-    const randomColors = Array(NUM_OF_CARDS).fill();
-    const randomColorsIdx = colors.map((val,idx) => idx);
+  randomizeArray(arr) {
+    // shuffle the incomming array
+    const randomItemsArr = Array(arr.length).fill();
+    const randomItemIdx = arr.map((val,idx) => idx);
     let randomIdx;
-    for (let i = 0; i < (colors.length); i++){
-      randomIdx = Math.floor(Math.random() * randomColorsIdx.length);
-      randomColors.splice(randomColorsIdx[randomIdx],1,colors[i]);
-      randomColorsIdx.splice(randomIdx,1);
+    for (let i = 0; i < (arr.length); i++){
+      randomIdx = Math.floor(Math.random() * randomItemIdx.length);
+      randomItemsArr.splice(randomItemIdx[randomIdx],1,arr[i]);
+      randomItemIdx.splice(randomIdx,1);
     }
-    return randomColors;
+    return randomItemsArr;
   }
 
   createColorCards() {
     
     // Randomize the color array
-    const randomColors = this.randomizeColors();
+    const randomColors = this.randomizeArray(COLORS.concat(COLORS));
     
     // create key value pair object of color cards
     let colorCards = {};
